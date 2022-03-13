@@ -21,9 +21,25 @@ app.get('/notes', (req, res) => {
 app.get('/api/notes', (req, res) => {
     res.json(notesJSON);
 });
-router.get('*', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
+
+function createNote(body, notesArr) {
+    const newNote = body;
+
+    if (!Array.isArray(notesArr)) {
+    notesArr = []
+    };
+
+    body.id = notesArr[0];
+    notesArr[0]++;
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify(notesArr, null, 2)
+    );
+    return newNote;
+}
 
 // create 
 app.post('/api/notes', (req, res) => {
@@ -31,14 +47,26 @@ app.post('/api/notes', (req, res) => {
   if (!req.body.title) {
     res.status(400).send('No title included');
   } else {
-    // const note = (req.body, );
-    notesJSON.push(note)
+    const newNote = createNote(req.body, notesJSON)
+    notesJSON.push(newNote)
 
   }
 })
 
+function deleteNote(id, notesArr) {
+    
+}
 // delete
-app.delete
+app.delete('/api/notes/:id', (req, res) => {
+    notesJSON = notesJSON.filter(note => {
+        return note.id !== req.params.id
+    })
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify(notesJSON)
+    );
+    return res.send();
+})
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`)
