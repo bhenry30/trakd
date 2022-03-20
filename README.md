@@ -6,11 +6,11 @@ trakr is an application that allows users to write, save, and delete notes.
 
 * Click the Get Started button
 * Type a note title and description in the specified boxes.
-* Hit the save icon on the top right to save inputed text to a note in the container on the left side of the page.
+* Hit the save icon on the top right to save inputed text to a note in the column on the left side of the page.
 * Click each note in the container to display their content.
 * You can delete notes by clicking the trash icon on the right side of the saved note.
 
-![screenshot1]()
+![screenshot1](./public/assets/images/trakr-screenshot.png)
 
 ## Technologies
 
